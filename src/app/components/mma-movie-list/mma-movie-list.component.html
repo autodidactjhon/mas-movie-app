@@ -1,0 +1,5 @@
+<p>My Movies</p>
+<ul>
+  <p *ngIf="!movies.length">There are no movies to show.</p>
+  <app-mma-movie-item [movie]="movie" *ngFor="let movie of movies"></app-mma-movie-item>
+</ul>

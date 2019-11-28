@@ -1,0 +1,7 @@
+<p *ngIf="!movie">There are no movie selected</p>
+<div *ngIf="movie">
+  <p>{{ movie.title }}</p>
+  <p>{{ movie.releaseDate }}</p>
+  <img src={movie.image} alt={movie.title}/>
+  <p>{{ movie.description }}</p>
+</div>
