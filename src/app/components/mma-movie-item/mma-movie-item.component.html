@@ -1,4 +1,11 @@
 <li (click)="showMovie(movie)">
-  <p>{{ movie.title }}</p>
-  <p>{{ movie.releaseDate }}</p>
+  <div>
+    <p>{{ movie.title }}</p>
+    <p>Release date: {{ movie.releaseDate }}</p>
+  </div>
+  <div class="icon-delete">
+    <span (click)="deleteMovie(movie.id)">
+      <img src="./../../../assets/icon-trash.svg">
+    </span>
+  </div>  
 </li>

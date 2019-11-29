@@ -1,7 +1,31 @@
-<p *ngIf="!movie">There are no movie selected</p>
-<div *ngIf="movie">
-  <p>{{ movie.title }}</p>
-  <p>{{ movie.releaseDate }}</p>
-  <img src={movie.image} alt={movie.title}/>
-  <p>{{ movie.description }}</p>
+<div class="row content-detail rounded">
+  <div class="col">
+    <div class="row">
+      <div class="col d-flex justify-content-end">
+          <button (click)="redirectToAddMovie()" class="btn btn-primary">Add new movie</button>
+      </div>
+    </div>
+    <div class="row movie-detail rounded">
+      <div *ngIf="!movie" class="col d-flex justify-content-center">
+        <div class="message-no-movie">
+          <p>There is not a movie selected</p>
+        </div>
+      </div>
+      <div *ngIf="movie" class="col movie">
+        <div>
+          <div class="movie-title col d-flex justify-content-between rounded-top">
+            <p class="m-0">{{ movie.title }}</p>
+            <p class="m-0">Date: {{ movie.releaseDate }}</p>
+          </div>
+          <div class="movie-image">
+            <img src="{{'data:image/jpg;base64,' + movie.image}}" alt={movie.title}/>
+          </div>
+          <div class="movie-description">
+            <p>{{ movie.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

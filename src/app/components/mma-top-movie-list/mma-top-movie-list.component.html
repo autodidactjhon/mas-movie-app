@@ -1,0 +1,10 @@
+<li *ngIf="movie" class="list-group-item d-flex">
+  <div class="movie-image">
+    <img src={{movie.image}} alt={movie.title}/>
+  </div>
+  <div class="movie-info">
+    <p class="title">{{ movie.title }}</p>
+    <p class="release-date">Release Date: {{ movie.release }}</p>
+    <p class="description">{{ movie.description }}</p>
+  </div>
+</li>

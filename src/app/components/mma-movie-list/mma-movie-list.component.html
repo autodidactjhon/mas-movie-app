@@ -1,5 +1,14 @@
-<p>My Movies</p>
+<div *ngIf="!movies.length" class="message-no-list">
+  <div>
+    <img src="./../../../assets/empty-box.svg">
+    <p>There are no movies to list.</p>
+  </div>
+</div>
 <ul>
-  <p *ngIf="!movies.length">There are no movies to show.</p>
-  <app-mma-movie-item [movie]="movie" *ngFor="let movie of movies"></app-mma-movie-item>
+  <app-mma-movie-item
+    class="movie-item"
+    [ngClass]="{'selected': movie.id === idMovieSelected}"
+    [movie]="movie"
+    *ngFor="let movie of movies">
+  </app-mma-movie-item>
 </ul>

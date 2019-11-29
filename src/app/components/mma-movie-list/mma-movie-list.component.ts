@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Movie } from './../../app.models';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-mma-movie-list',
@@ -9,9 +10,13 @@ import { Movie } from './../../app.models';
 export class MmaMovieListComponent implements OnInit {
 
   @Input() movies:Movie[];
+  idMovieSelected:number;
 
-  constructor() {}
+  constructor( public movieService: MovieService ) {}
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.movieService.selectedMovie.subscribe(movie => {
+      if(movie){this.idMovieSelected = movie.id}
+    });
+  }
 }

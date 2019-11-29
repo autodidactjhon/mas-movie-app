@@ -8,6 +8,9 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { moviesReducers } from './reducers/movie.reducers';
 
+//services
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -19,6 +22,7 @@ import { MmaMovieDetailComponent } from './components/mma-movie-detail/mma-movie
 import { MmaMovieItemComponent } from './components/mma-movie-item/mma-movie-item.component';
 import { MmaAddMovieComponent } from './components/mma-add-movie/mma-add-movie.component';
 import { environment } from '../environments/environment';
+import { MmaTopMovieListComponent } from './components/mma-top-movie-list/mma-top-movie-list.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +34,14 @@ import { environment } from '../environments/environment';
     MmaMovieListComponent,
     MmaMovieDetailComponent,
     MmaMovieItemComponent,
-    MmaAddMovieComponent
+    MmaAddMovieComponent,
+    MmaTopMovieListComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ movies: moviesReducers }),

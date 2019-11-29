@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { Store } from '@ngrx/store';
 import { AppState } from './../../app.reducers';
 
-import { AddMovieAction, DeleteMovieAction } from './../../actions/movie.actions';
+import { AddMovieAction } from './../../actions/movie.actions';
 
 @Component({
   selector: 'app-mma-add-movie',
@@ -16,8 +17,13 @@ export class MmaAddMovieComponent implements OnInit {
 
   movie:FormGroup;
   currentYear:Date;
+  base64textString:string;
 
-  constructor( private store: Store<AppState>, config: NgbDatepickerConfig ) {
+  constructor( 
+    private store: Store<AppState>,
+    private router: Router,
+    config: NgbDatepickerConfig
+    ) {
     //Customize default datapicker values
     this.currentYear = new Date();
     config.minDate = { year: 1900, month: 1, day: 1 };
@@ -36,15 +42,34 @@ export class MmaAddMovieComponent implements OnInit {
   ngOnInit() {
   }
 
+  //handle image selected
+  handleFileSelect(evt){
+    const files = evt.target.files;
+    const file = files[0];
+  
+    if (files && file) {
+      const reader = new FileReader();
+      reader.onload = this.handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  //read image and convert it to base64
+  handleReaderLoaded(readerEvt) {
+    const binaryString = readerEvt.target.result;
+    this.base64textString = btoa(binaryString);
+   }
+
   saveMovie() {
     const date = this.movie.value.releaseDate;
-    const releaseDate = date.year+'-'+date.month+'-'+date.day;
+    const releaseDate = date.day+'/'+date.month+'/'+date.year;
 
     const action = new AddMovieAction( this.movie.value.description,
-                                       this.movie.value.image,
+                                       this.base64textString,
                                        this.movie.value.title,
                                        releaseDate );
     this.store.dispatch( action );
+    this.router.navigate(['/home'])
   }
 
 }

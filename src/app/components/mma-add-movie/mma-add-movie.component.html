@@ -38,7 +38,8 @@
     <div class="col-3">
       <div class="form-group">
         <label for="image">Movie image</label>
-        <input type="file"
+        <input (change)="handleFileSelect($event)"
+               type="file"
                class="form-control-file"
                id="image"
                formControlName="image">
